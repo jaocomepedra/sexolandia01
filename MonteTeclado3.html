@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte seu Teclado - Keycaps | GameHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { background: #18182a; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .monte-container { max-width: 900px; margin: 48px auto; background: #23233a; border-radius: 18px; box-shadow: 0 4px 32px 0 #00ffb344; padding: 32px 28px 24px 28px; }
+        .progress-bar-monte { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+        .progress-step-monte { flex: 1; text-align: center; position: relative; color: #888; font-weight: 500; font-size: 1.08rem; }
+        .progress-step-monte.active { color: #00ffb3; font-weight: bold; text-shadow: 0 0 8px #00ffb3, 0 0 4px #6e00ff; }
+        .progress-step-monte:not(:last-child)::after { content: ''; position: absolute; right: -50%; top: 50%; width: 100%; height: 5px; background: linear-gradient(90deg, #00ffb3 0%, #6e00ff 100%); z-index: 1; transform: translateY(-50%); border-radius: 4px; box-shadow: 0 0 12px #00ffb3cc, 0 0 8px #6e00ff99; opacity: 0.7; }
+        .progress-step-monte.active:not(:last-child)::after { background: linear-gradient(90deg, #00ffb3 0%, #6e00ff 100%); opacity: 1; }
+        .etapa-titulo { color: #00ffb3; font-size: 1.5rem; margin-bottom: 18px; }
+        .keycaps-section { display: flex; gap: 36px; align-items: flex-start; }
+        .keycaps-opcoes { flex: 1.2; }
+        .keycaps-preview { flex: 1; background: #18182a; border-radius: 14px; box-shadow: 0 2px 16px #00ffb355; padding: 24px; display: flex; flex-direction: column; align-items: center; }
+        .keycaps-preview .preview-label { color: #a200ff; font-size: 1.08rem; margin-bottom: 8px; }
+        .opcoes-group { margin-bottom: 22px; }
+        .opcoes-label { font-weight: bold; color: #00ffb3; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .tooltip { position: relative; display: inline-block; cursor: pointer; }
+        .tooltip .tooltiptext { visibility: hidden; width: 220px; background: #23233a; color: #fff; text-align: left; border-radius: 8px; padding: 8px; position: absolute; z-index: 10; bottom: 125%; left: 50%; transform: translateX(-50%); opacity: 0; transition: opacity 0.3s; font-size: 0.98rem; box-shadow: 0 2px 8px #00ffb344; }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+        .btn-opcao { background: #18182a; color: #fff; border: 2px solid #6e00ff; border-radius: 8px; padding: 10px 18px; font-size: 1.05rem; font-weight: bold; margin-right: 10px; margin-bottom: 10px; cursor: pointer; transition: background 0.2s, color 0.2s, border 0.2s, transform 0.15s; box-shadow: 0 0 12px 2px #6e00ff33; }
+        .btn-opcao.selected, .btn-opcao:hover { background: linear-gradient(90deg, #00ffb3 0%, #6e00ff 100%); color: #18182a; border: 2px solid #00ffb3; transform: scale(1.06); }
+        .temas-cards { display: flex; gap: 18px; margin-bottom: 18px; }
+        .tema-card { background: #18182a; border-radius: 10px; padding: 14px 18px; box-shadow: 0 0 12px #00ffb344; display: flex; flex-direction: column; align-items: center; min-width: 110px; border: 2px solid transparent; transition: border 0.2s, box-shadow 0.2s; position: relative; cursor: pointer; }
+        .tema-card.selected, .tema-card:hover { border: 2px solid #00ffb3; box-shadow: 0 0 24px #00ffb3cc; }
+        .tema-card .tema-nome { font-weight: bold; color: #fff; margin-bottom: 4px; }
+        .tema-card img { width: 48px; height: 48px; object-fit: contain; margin-bottom: 6px; filter: drop-shadow(0 0 8px #00ffb3); }
+        .custom-group { margin-bottom: 18px; }
+        .custom-label { color: #00ffb3; font-weight: bold; margin-bottom: 6px; }
+        .custom-inputs { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+        .custom-inputs input[type='color'] { width: 32px; height: 32px; border: none; border-radius: 6px; }
+        .custom-inputs input[type='file'] { color: #fff; }
+        .preview-keyboard-img { width: 100%; max-width: 320px; border-radius: 10px; background: #23233a; box-shadow: 0 0 24px #00ffb3cc; margin-bottom: 12px; }
+        .resumo-final { margin-top: 24px; background: #18182a; border-radius: 12px; box-shadow: 0 0 12px #00ffb344; padding: 18px 16px; color: #fff; font-size: 1.08rem; }
+        .resumo-final span { color: #00ffb3; font-weight: bold; }
+        @media (max-width: 900px) { .keycaps-section { flex-direction: column; gap: 18px; } .keycaps-preview { max-width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="monte-container">
+        <div class="progress-bar-monte">
+            <div class="progress-step-monte">1/3<br><i class="fas fa-keyboard"></i><br>Modelo</div>
+            <div class="progress-step-monte">2/3<br><i class="fas fa-sliders-h"></i><br>Switches</div>
+            <div class="progress-step-monte active">3/3<br><i class="fas fa-font"></i><br>Keycaps</div>
+        </div>
+        <div class="etapa-titulo">Escolha as Keycaps</div>
+        <div class="keycaps-section">
+            <div class="keycaps-opcoes">
+                <div class="opcoes-group">
+                    <div class="opcoes-label">Material:
+                        <span class="tooltip"><i class="fas fa-info-circle"></i>
+                            <span class="tooltiptext">ABS: mais barato, brilho com o tempo. PBT: mais resistente, fosco. Personalizadas: com arte ou foto.</span>
+                        </span>
+                    </div>
+                    <button class="btn-opcao" data-material="abs">ABS (brilhante)</button>
+                    <button class="btn-opcao" data-material="pbt">PBT (resistente)</button>
+                    <button class="btn-opcao" data-material="personalizada">Personalizadas</button>
+                </div>
+                <div class="opcoes-group">
+                    <div class="opcoes-label">Temas Prontos:</div>
+                    <div class="temas-cards">
+                        <div class="tema-card" data-tema="gamer">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Gamer">
+                            <div class="tema-nome">Gamer (escuro + RGB)</div>
+                        </div>
+                        <div class="tema-card" data-tema="retro">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1055/1055672.png" alt="Retro">
+                            <div class="tema-nome">Retro (bege)</div>
+                        </div>
+                        <div class="tema-card" data-tema="minimalista">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1055/1055676.png" alt="Minimalista">
+                            <div class="tema-nome">Minimalista (branco fosco)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-group">
+                    <div class="custom-label">Customização Avançada:</div>
+                    <div class="custom-inputs">
+                        <label>Cor F1-F12: <input type="color" value="#00ffb3"></label>
+                        <label>Cor WASD: <input type="color" value="#a200ff"></label>
+                        <label>Cor ESC: <input type="color" value="#ffe600"></label>
+                    </div>
+                    <div class="custom-inputs">
+                        <label>Arte na tecla ESC (+R$20): <input type="file" accept="image/*"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="keycaps-preview">
+                <div class="preview-label">Preview em Tempo Real</div>
+                <img class="preview-keyboard-img" src="https://cdn.shopify.com/s/files/1/0059/0630/1017/files/keychron-q1-75-white_600x.png" alt="Preview Teclado Keycaps">
+                <div style="color:#aaa;font-size:0.98rem;margin-top:8px;">As escolhas de cor e tema aparecerão aqui.</div>
+            </div>
+        </div>
+        <div class="resumo-final">
+            <div><span>Seu Teclado Custom:</span></div>
+            <div>Modelo: <span id="resumo-modelo">Keychron Q1 (75%) - Branco</span></div>
+            <div>Switches: <span id="resumo-switch">Gateron Brown (táteis)</span></div>
+            <div>Keycaps: <span id="resumo-keycaps">PBT Japanese Minimalist</span></div>
+            <div>Extras: <span id="resumo-extras">Cabo Rosa + Palm Rest</span></div>
+            <div>Total: <span id="resumo-total">R$ 899,00</span></div>
+        </div>
+        <div style="margin-top:32px;display:flex;justify-content:space-between;">
+            <button class="btn-opcao" style="font-size:1.08rem;padding:12px 32px;" onclick="window.location.href='MonteTeclado2.html'">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <button class="btn-opcao" style="font-size:1.15rem;padding:14px 38px;" onclick="window.location.href='carrinho.html'">Finalizar e Adicionar ao Carrinho <i class="fas fa-check"></i></button>
+        </div>
+    </div>
+</body>
+</html>

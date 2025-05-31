@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nome do Produto | GameHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- HEADER igual ao do seu site -->
+    <header class="main-header">
+        <div class="top-bar">
+            <p>🎮 Frete Grátis em compras acima de R$ 300 | 10x sem juros | Garantia Estendida</p>
+        </div>
+        <div class="header-bar">
+            <div class="header-left">
+                <div class="logo-area">
+                    <span class="logo-icon"><i class="fas fa-gamepad"></i></span>
+                    <a href="index.html" class="logo-text" style="text-decoration:none;color:inherit;cursor:pointer;">GameHub</a>
+                </div>
+            </div>
+            <div class="header-center">
+                <input type="text" class="search-input" placeholder="Pesquise o seu produto">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-right">
+                <span class="user-area"><i class="fas fa-user"></i> Olá, Entre ou Cadastre-se</span>
+                <span class="header-icon"><i class="fas fa-heart"></i></span>
+                <span class="header-icon"><i class="fas fa-shopping-cart"></i></span>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <a href="#">DEPARTAMENTOS</a>
+            <a href="#">PROMOÇÕES</a>
+            <a href="#">PC GAMER</a>
+            <a href="#">KIT UPGRADE</a>
+            <a href="#">HARDWARE</a>
+            <a href="#">NOTEBOOKS</a>
+            <a href="#">MONITORES</a>
+            <a href="#">MONTE SEU PC</a>
+            <a href="#">ATENDIMENTO</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="product-page">
+            <div class="product-gallery">
+                <img src="https://img.terabyteshop.com.br/archive/1399555436/10017-ssd-kingston-SA400S37960G-03.png" alt="Produto" class="main-image" id="mainImage">
+                <div class="thumbs">
+                    <img src="https://img.terabyteshop.com.br/archive/1399555436/10017-ssd-kingston-SA400S37960G-03.png" alt="Produto" class="thumb active" onclick="changeImage(this)">
+                    <img src="https://via.placeholder.com/400x400?text=Outro+Ângulo" alt="Produto" class="thumb" onclick="changeImage(this)">
+                </div>
+            </div>
+            <div class="product-info-box">
+                <div class="destaques-flex">
+                    <button class="btn-mais-vendido"><i class="fas fa-fire"></i> MAIS VENDIDO</button>
+                    <div class="badge-vendas-gamer">
+                        <i class="fas fa-bolt"></i> <span>5.000 UNIDADES VENDIDAS</span>
+                    </div>
+                </div>
+                <div class="promo-banner-badge">
+                    <span class="neon-badge"><i class="fas fa-fire"></i> 44% OFF</span>
+                    <span class="neon-badge time"><i class="fas fa-hourglass-half"></i> Só até 2 dias</span>
+                    <span class="neon-badge stock"><i class="fas fa-box-open"></i> Últimas 8 unidades</span>
+                </div>
+                <div class="urgency-bar-inline">
+                    <i class="fas fa-fire"></i>
+                    <b>CORRA!</b> ÚLTIMAS UNIDADES COM <span class="off">44% OFF</span> — Só até <span class="today">HOJE</span> ou acabar o estoque
+                </div>
+                <h1 class="product-title">SSD Kingston A400, 480GB, Sata III</h1>
+                <div class="deal-timer" id="deal-timer">
+                    <i class="fas fa-clock"></i>
+                    <span>Oferta termina em <b id="timer-days">2</b>d <b id="timer-hours">00</b>h <b id="timer-mins">00</b>m <b id="timer-secs">00</b>s</span>
+                </div>
+                <div class="promo-banner-prices">
+                    <span class="old-price">R$ 439,90</span>
+                    <span class="promo-price-neon">R$ 244,90</span>
+                </div>
+              
+                <div class="installments-gamer-badge">
+                    <i class="fas fa-credit-card"></i> 12x de R$ 20,41 <span class="sem-juros">SEM JUROS</span>
+                </div>
+                <button class="promo-buy-btn">COMPRAR COM DESCONTO</button>
+                <div class="product-highlights">
+                  
+                </div>
+                <ul class="product-details">
+                    <li><b>Capacidade:</b> 480GB</li>
+                    <li><b>Leitura:</b> 500MB/s</li>
+                    <li><b>Gravação:</b> 450MB/s</li>
+                    <li><b>Garantia:</b> 12 meses</li>
+                </ul>
+                <div class="product-description">
+                    <h2>Descrição</h2>
+                    <p>
+                        O SSD Kingston A400 oferece velocidades incríveis de leitura e gravação, melhorando o desempenho do seu PC para jogos, trabalho ou uso diário. Compatível com diversos sistemas e fácil de instalar.
+                    </p>
+                </div>
+                <div class="product-qualities">
+                    <div class="quality">
+                        <i class="fas fa-bolt"></i>
+                        <div>
+                            <h3>Desempenho Rápido</h3>
+                            <p>Velocidades de leitura e gravação superiores para inicialização e carregamento instantâneo.</p>
+                        </div>
+                    </div>
+                    <div class="quality">
+                        <i class="fas fa-database"></i>
+                        <div>
+                            <h3>Grande Capacidade</h3>
+                            <p>Armazene jogos, arquivos e programas sem se preocupar com espaço.</p>
+                        </div>
+                    </div>
+                    <div class="quality">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h3>Mais Confiável</h3>
+                            <p>Mais resistente a impactos e vibrações do que HDs tradicionais.</p>
+                        </div>
+                    </div>
+                    <div class="quality">
+                        <i class="fas fa-sync-alt"></i>
+                        <div>
+                            <h3>Compatibilidade</h3>
+                            <p>Fácil instalação em desktops e notebooks, compatível com diversos sistemas.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Qualidades do Produto em blocos horizontais -->
+                <section class="qualities-section">
+                    <div class="quality-block dark">
+                        <div class="quality-img">
+                            <img src="imagens/ssd-rapido.png" alt="Desempenho Rápido">
+                        </div>
+                        <div class="quality-text">
+                            <h2>ACELERE SEU COMPUTADOR</h2>
+                            <p>
+                                Com incríveis velocidades de leitura/gravação, o SSD A400 não só aumenta o desempenho, como também pode dar vida nova a computadores mais antigos.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="quality-block light">
+                        <div class="quality-img">
+                            <img src="imagens/ssd-capacidade.png" alt="Grande Capacidade">
+                        </div>
+                        <div class="quality-text">
+                            <h2>CAPACIDADE</h2>
+                            <p>
+                                Disponível em 480GB para armazenar aplicativos, vídeos, fotos e documentos importantes sem preocupação.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="quality-block dark">
+                        <div class="quality-img">
+                            <img src="https://img.terabyteshop.com.br/archive/1399555436/10017-ssd-kingston-SA400S37960G-03.png" alt="Mais Confiável">
+                        </div>
+                        <div class="quality-text">
+                            <h2>MAIS CONFIÁVEL</h2>
+                            <p>
+                                Mais resistente a impactos e vibrações do que HDs tradicionais, garantindo maior durabilidade para seus dados.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="quality-block light">
+                        <div class="quality-img">
+                            <img src="imagens/ssd-compatibilidade.png" alt="Compatibilidade">
+                        </div>
+                        <div class="quality-text">
+                            <h2>COMPATIBILIDADE</h2>
+                            <p>
+                                Fácil instalação em desktops e notebooks, compatível com diversos sistemas operacionais.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+    <script>
+        function changeImage(el) {
+            document.getElementById('mainImage').src = el.src;
+            document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function startCountdown(endDate) {
+            function update() {
+                const now = new Date();
+                const end = new Date(endDate);
+                let diff = Math.max(0, end - now);
+                let days = Math.floor(diff / (1000*60*60*24));
+                let hours = Math.floor((diff / (1000*60*60)) % 24);
+                let mins = Math.floor((diff / (1000*60)) % 60);
+                let secs = Math.floor((diff / 1000) % 60);
+                document.getElementById('timer-days').textContent = days;
+                document.getElementById('timer-hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('timer-mins').textContent = String(mins).padStart(2, '0');
+                document.getElementById('timer-secs').textContent = String(secs).padStart(2, '0');
+            }
+            update();
+            setInterval(update, 1000);
+        }
+        startCountdown('2024-06-10T23:59:59');
+    </script>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte seu Setup | GameHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background: #18182a;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .setup-builder {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: #23233a;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px 0 #00ffb344;
+            padding: 32px 24px 24px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        .setup-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: center;
+        }
+        .setup-options select, .setup-options input {
+            background: #18182a;
+            color: #fff;
+            border: 1px solid #6e00ff;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 1.1rem;
+            min-width: 180px;
+        }
+        .setup-options label {
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 10px;
+        }
+        .filters select, .filters input {
+            background: #23233a;
+            color: #fff;
+            border: 1px solid #00ffb3;
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-size: 1rem;
+        }
+        .suggestions {
+            background: #1e1e2e;
+            border-radius: 10px;
+            padding: 16px 18px;
+            color: #00ffb3;
+            font-size: 1.08rem;
+            margin-bottom: 0;
+            box-shadow: 0 2px 8px 0 #00ffb344;
+        }
+        .kit-visualization {
+            background: #18182a;
+            border-radius: 12px;
+            padding: 18px 18px 10px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: flex-start;
+            min-height: 120px;
+        }
+        .kit-card {
+            background: #23233a;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px 0 #00ffb344;
+            padding: 16px 14px;
+            min-width: 220px;
+            max-width: 260px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .kit-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #18182a;
+        }
+        .kit-card .kit-title {
+            font-size: 1.08rem;
+            font-weight: bold;
+            color: #00ffb3;
+            text-align: center;
+        }
+        .kit-card .kit-specs {
+            font-size: 0.97rem;
+            color: #a200ff;
+            text-align: center;
+        }
+        .kit-card .kit-price {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .combos-section {
+            margin-top: 0;
+        }
+        .combos-title {
+            color: #00ffb3;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .combos-list {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .combo-card {
+            background: #23233a;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px 0 #00ffb344;
+            padding: 14px 12px;
+            min-width: 200px;
+            max-width: 240px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .combo-card img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #18182a;
+        }
+        .combo-card .combo-title {
+            font-size: 1.01rem;
+            font-weight: bold;
+            color: #00ffb3;
+            text-align: center;
+        }
+        .combo-card .combo-price {
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: bold;
+        }
+        .comparison-section {
+            margin-top: 0;
+            background: #1e1e2e;
+            border-radius: 10px;
+            padding: 14px 18px;
+            color: #fff;
+            font-size: 1.05rem;
+            box-shadow: 0 2px 8px 0 #00ffb344;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #23233a;
+            padding: 8px 10px;
+            text-align: center;
+        }
+        .setup-actions {
+            display: flex;
+            gap: 18px;
+            margin-top: 10px;
+        }
+        .setup-actions button {
+            background: linear-gradient(90deg, #00ffb3 0%, #6e00ff 100%);
+            color: #18182a;
+            font-size: 1.13rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 28px;
+            box-shadow: 0 0 18px 0 #00ffb3cc, 0 0 8px 0 #a200ff99;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, transform 0.18s;
+        }
+        .setup-actions button:hover {
+            background: linear-gradient(90deg, #6e00ff 0%, #00ffb3 100%);
+            color: #fff;
+            transform: scale(1.04);
+        }
+        @media (max-width: 900px) {
+            .setup-builder { padding: 12px 2vw; }
+            .kit-visualization { flex-direction: column; align-items: stretch; }
+            .combos-list { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="setup-builder">
+        <div class="setup-options">
+            <label for="usage-type">Tipo de uso:</label>
+            <select id="usage-type">
+                <option value="gamer">Gamer</option>
+                <option value="office">Trabalho/Office</option>
+                <option value="streaming">Streaming</option>
+                <option value="design">Design</option>
+            </select>
+            <label for="budget">Orçamento máximo (opcional):</label>
+            <input type="number" id="budget" placeholder="R$">
+            <div class="filters">
+                <select id="filter-type">
+                    <option value="">Tipo</option>
+                    <option value="mecanico">Mecânico</option>
+                    <option value="semfio">Sem fio</option>
+                    <option value="ergonomico">Ergonômico</option>
+                </select>
+                <select id="filter-brand">
+                    <option value="">Marca</option>
+                    <option value="Logitech">Logitech</option>
+                    <option value="Razer">Razer</option>
+                    <option value="HyperX">HyperX</option>
+                    <option value="Redragon">Redragon</option>
+                </select>
+                <input type="text" id="filter-spec" placeholder="Ex: 16000 DPI, Blue Switch, 7.1">
+            </div>
+        </div>
+        <div class="suggestions" id="suggestions"></div>
+        <div class="kit-visualization" id="kit-visualization"></div>
+        <div class="combos-section">
+            <div class="combos-title">Mais Vendidos & Combos Econômicos</div>
+            <div class="combos-list" id="combos-list"></div>
+        </div>
+        <div class="comparison-section" id="comparison-section" style="display:none;"></div>
+        <div class="setup-actions">
+            <button id="finalizar-kit">Finalizar Kit</button>
+            <button id="comprar-separado">Comprar Separado</button>
+            <button id="reiniciar">Reiniciar</button>
+        </div>
+    </div>
+    <script>
+// --- Dados de exemplo ---
+const produtos = [
+    // Teclados
+    {id: 1, tipo: 'teclado', nome: 'Redragon K530', marca: 'Redragon', preco: 349.90, imagem: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=400&q=80', specs: '60% mecânico, RGB, Blue Switch', estilo: 'rgb', maisVendido: true, nivel: 'intermediario', aval: 4.7},
+    {id: 2, tipo: 'teclado', nome: 'Logitech G Pro X', marca: 'Logitech', preco: 799.90, imagem: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80', specs: 'Mecânico, RGB, Hot Swap', estilo: 'rgb', maisVendido: false, nivel: 'profissional', aval: 4.9},
+    {id: 3, tipo: 'teclado', nome: 'HyperX Alloy FPS', marca: 'HyperX', preco: 499.90, imagem: 'https://images.unsplash.com/photo-1512257752821-0a9115c56856?auto=format&fit=crop&w=400&q=80', specs: 'Mecânico, Red Switch', estilo: 'minimalista', maisVendido: true, nivel: 'intermediario', aval: 4.8},
+    // Mouses
+    {id: 4, tipo: 'mouse', nome: 'Logitech G502 Hero', marca: 'Logitech', preco: 299.90, imagem: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80', specs: '16.000 DPI, RGB, 11 botões', estilo: 'rgb', maisVendido: true, nivel: 'profissional', aval: 4.9},
+    {id: 5, tipo: 'mouse', nome: 'Razer DeathAdder V2', marca: 'Razer', preco: 399.90, imagem: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80', specs: '20.000 DPI, RGB', estilo: 'rgb', maisVendido: false, nivel: 'profissional', aval: 4.8},
+    {id: 6, tipo: 'mouse', nome: 'Redragon Cobra', marca: 'Redragon', preco: 159.90, imagem: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80', specs: '10.000 DPI, RGB', estilo: 'rgb', maisVendido: true, nivel: 'iniciante', aval: 4.6},
+    // Headsets
+    {id: 7, tipo: 'headset', nome: 'HyperX Cloud Stinger', marca: 'HyperX', preco: 299.90, imagem: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80', specs: '7.1 virtual, Leve', estilo: 'minimalista', maisVendido: true, nivel: 'intermediario', aval: 4.7},
+    {id: 8, tipo: 'headset', nome: 'Razer Kraken', marca: 'Razer', preco: 499.90, imagem: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80', specs: 'Drivers 50mm, RGB', estilo: 'rgb', maisVendido: false, nivel: 'profissional', aval: 4.8},
+    // Mousepads
+    {id: 9, tipo: 'mousepad', nome: 'Speed XL', marca: 'Redragon', preco: 89.90, imagem: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80', specs: '90x40cm, Base emborrachada', estilo: 'minimalista', maisVendido: true, nivel: 'iniciante', aval: 4.5},
+    {id: 10, tipo: 'mousepad', nome: 'Logitech G640', marca: 'Logitech', preco: 199.90, imagem: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80', specs: '45x40cm, Superfície Control', estilo: 'minimalista', maisVendido: false, nivel: 'profissional', aval: 4.7},
+    // Microfone e Webcam
+    {id: 11, tipo: 'microfone', nome: 'Fifine K669B', marca: 'Fifine', preco: 229.90, imagem: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=400&q=80', specs: 'USB, Cardioide', estilo: 'minimalista', maisVendido: true, nivel: 'iniciante', aval: 4.6},
+    {id: 12, tipo: 'webcam', nome: 'Logitech C920', marca: 'Logitech', preco: 399.90, imagem: 'https://images.unsplash.com/photo-1512257752821-0a9115c56856?auto=format&fit=crop&w=400&q=80', specs: '1080p, Autofoco', estilo: 'minimalista', maisVendido: true, nivel: 'intermediario', aval: 4.8},
+];
+
+const tiposUso = {
+    gamer: {
+        sugestao: 'Para gamer, sugerimos mouse RGB + teclado mecânico + headset 7.1 + mousepad grande.',
+        obrigatorios: ['teclado', 'mouse', 'headset', 'mousepad']
+    },
+    office: {
+        sugestao: 'Para trabalho, priorize ergonomia e conforto. Teclado silencioso, mouse ergonômico.',
+        obrigatorios: ['teclado', 'mouse']
+    },
+    streaming: {
+        sugestao: 'Para streaming, recomendamos um microfone de mesa + webcam 1080p + headset.',
+        obrigatorios: ['microfone', 'webcam', 'headset']
+    },
+    design: {
+        sugestao: 'Para design, busque precisão: mouse de alta DPI, teclado confortável, mousepad grande.',
+        obrigatorios: ['teclado', 'mouse', 'mousepad']
+    }
+};
+
+let kit = [];
+let comparacao = [];
+
+function renderSuggestions() {
+    const uso = document.getElementById('usage-type').value;
+    document.getElementById('suggestions').textContent = tiposUso[uso].sugestao;
+}
+
+function renderKit() {
+    const vis = document.getElementById('kit-visualization');
+    vis.innerHTML = '';
+    let total = 0;
+    kit.forEach((prod, idx) => {
+        total += prod.preco;
+        vis.innerHTML += `
+        <div class="kit-card">
+            <img src="${prod.imagem}" alt="${prod.nome}">
+            <div class="kit-title">${prod.nome}</div>
+            <div class="kit-specs">${prod.specs}</div>
+            <div class="kit-price">R$ ${prod.preco.toFixed(2)}</div>
+            <button onclick="removerDoKit(${idx})" style="margin-top:6px;background:#ff4b7d;color:#fff;padding:4px 12px;border-radius:6px;border:none;cursor:pointer;">Remover</button>
+            <button onclick="compararProduto(${prod.id})" style="margin-top:6px;background:#00ffb3;color:#18182a;padding:4px 12px;border-radius:6px;border:none;cursor:pointer;">Comparar</button>
+        </div>`;
+    });
+    if (total > 0) {
+        vis.innerHTML += `<div style="flex-basis:100%;height:1px;"></div><div style="font-weight:bold;font-size:1.15rem;color:#00ffb3;margin-top:10px;">Total: R$ ${total.toFixed(2)}</div>`;
+    }
+}
+
+function renderCombos() {
+    const combos = produtos.filter(p => p.maisVendido);
+    const list = document.getElementById('combos-list');
+    list.innerHTML = '';
+    combos.forEach(prod => {
+        list.innerHTML += `
+        <div class="combo-card">
+            <img src="${prod.imagem}" alt="${prod.nome}">
+            <div class="combo-title">${prod.nome}</div>
+            <div class="combo-price">R$ ${prod.preco.toFixed(2)}</div>
+            <button onclick="adicionarAoKit(${prod.id})" style="background:#00ffb3;color:#18182a;padding:4px 12px;border-radius:6px;border:none;cursor:pointer;">Adicionar ao Kit</button>
+        </div>`;
+    });
+}
+
+function renderComparison() {
+    const sec = document.getElementById('comparison-section');
+    if (comparacao.length < 2) { sec.style.display = 'none'; return; }
+    sec.style.display = 'block';
+    const [a, b] = comparacao.map(id => produtos.find(p => p.id === id));
+    sec.innerHTML = `<b>Comparação:</b>
+    <table class="comparison-table">
+        <tr><th></th><th>${a.nome}</th><th>${b.nome}</th></tr>
+        <tr><td>Marca</td><td>${a.marca}</td><td>${b.marca}</td></tr>
+        <tr><td>Preço</td><td>R$ ${a.preco.toFixed(2)}</td><td>R$ ${b.preco.toFixed(2)}</td></tr>
+        <tr><td>Specs</td><td>${a.specs}</td><td>${b.specs}</td></tr>
+        <tr><td>Estilo</td><td>${a.estilo}</td><td>${b.estilo}</td></tr>
+        <tr><td>Nível</td><td>${a.nivel}</td><td>${b.nivel}</td></tr>
+        <tr><td>Avaliação</td><td>${a.aval} ⭐</td><td>${b.aval} ⭐</td></tr>
+    </table>
+    <button onclick="comparacao=[];renderComparison();" style="margin-top:10px;background:#ff4b7d;color:#fff;padding:4px 12px;border-radius:6px;border:none;cursor:pointer;">Fechar Comparação</button>`;
+}
+
+function renderFiltrosProdutos() {
+    const uso = document.getElementById('usage-type').value;
+    const obrigatorios = tiposUso[uso].obrigatorios;
+    let html = '';
+    obrigatorios.forEach(tipo => {
+        html += `<div style="margin-bottom:18px;">
+            <b style="color:#00ffb3;text-transform:uppercase;">${tipo}</b><br>`;
+        // Filtros
+        let filtrados = produtos.filter(p => p.tipo === tipo);
+        const fType = document.getElementById('filter-type').value;
+        const fBrand = document.getElementById('filter-brand').value;
+        const fSpec = document.getElementById('filter-spec').value.toLowerCase();
+        if (fType) filtrados = filtrados.filter(p => p.specs.toLowerCase().includes(fType));
+        if (fBrand) filtrados = filtrados.filter(p => p.marca === fBrand);
+        if (fSpec) filtrados = filtrados.filter(p => p.specs.toLowerCase().includes(fSpec));
+        // Orçamento
+        const budget = parseFloat(document.getElementById('budget').value);
+        if (!isNaN(budget)) {
+            const totalAtual = kit.reduce((acc, p) => acc + p.preco, 0);
+            filtrados = filtrados.filter(p => (totalAtual + p.preco) <= budget);
+        }
+        html += '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">';
+        filtrados.forEach(prod => {
+            html += `<div class="kit-card" style="min-width:180px;max-width:200px;">
+                <img src="${prod.imagem}" alt="${prod.nome}">
+                <div class="kit-title">${prod.nome}</div>
+                <div class="kit-specs">${prod.specs}</div>
+                <div class="kit-price">R$ ${prod.preco.toFixed(2)}</div>
+                <button onclick="adicionarAoKit(${prod.id})" style="background:#00ffb3;color:#18182a;padding:4px 12px;border-radius:6px;border:none;cursor:pointer;">Selecionar</button>
+            </div>`;
+        });
+        html += '</div></div>';
+    });
+    document.getElementById('kit-visualization').insertAdjacentHTML('beforeend', html);
+}
+
+function adicionarAoKit(id) {
+    const prod = produtos.find(p => p.id === id);
+    kit.push(prod);
+    renderAll();
+}
+function removerDoKit(idx) {
+    kit.splice(idx, 1);
+    renderAll();
+}
+function compararProduto(id) {
+    if (!comparacao.includes(id)) comparacao.push(id);
+    if (comparacao.length > 2) comparacao.shift();
+    renderComparison();
+}
+function renderAll() {
+    renderSuggestions();
+    renderKit();
+    renderCombos();
+    renderComparison();
+    renderFiltrosProdutos();
+}
+// Eventos
+['usage-type','budget','filter-type','filter-brand','filter-spec'].forEach(id => {
+    document.getElementById(id).addEventListener('input', renderAll);
+});
+document.getElementById('finalizar-kit').onclick = () => {
+    // Adiciona todos os produtos do kit ao carrinho (localStorage)
+    let carrinho = JSON.parse(localStorage.getItem('cart')) || [];
+    kit.forEach(prod => {
+        const idx = carrinho.findIndex(item => item.id === prod.id);
+        if (idx >= 0) {
+            carrinho[idx].qty += 1;
+        } else {
+            carrinho.push({
+                id: prod.id,
+                name: prod.nome,
+                price: prod.preco,
+                oldPrice: prod.preco,
+                image: prod.imagem,
+                qty: 1
+            });
+        }
+    });
+    localStorage.setItem('cart', JSON.stringify(carrinho));
+    window.location.href = 'carrinho.html';
+};
+document.getElementById('comprar-separado').onclick = () => {
+    alert('Cada item será adicionado separadamente ao carrinho! (Integração em breve)');
+};
+document.getElementById('reiniciar').onclick = () => {
+    kit = [];
+    comparacao = [];
+    renderAll();
+};
+// Inicialização
+renderAll();
+    </script>
+</body>
+</html>
