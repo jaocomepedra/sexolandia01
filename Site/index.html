@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub - Seu Portal Gamer Definitivo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- HEADER ESTILO KABUM, CORES DO SITE -->
+    <header class="main-header">
+        <div class="header-bar">
+            <div class="header-left">
+                <div class="logo-area">
+                    <span class="logo-icon"><i class="fas fa-gamepad"></i></span>
+                    <a href="index.html" class="logo-text" style="text-decoration:none;color:inherit;cursor:pointer;">GameHub</a>
+                </div>
+            </div>
+            <div class="header-center" style="position:relative;">
+                <input type="text" class="search-input" placeholder="Pesquise o seu produto">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+                <div class="header-search-suggestions" style="display:none;"></div>
+            </div>
+            <div class="header-right">
+                <span class="user-area" id="user-area">
+                    <button class="btn-cadastre-se" onclick="window.location.href='Cadastro.html'">
+                        <i class="fas fa-user"></i> Olá, Entre ou Cadastre-se
+                    </button>
+                </span>
+                <span class="header-icon"><i class="fas fa-heart"></i></span>
+                <span class="header-icon"><i class="fas fa-shopping-cart"></i></span>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <a href="#featured-products">DESTAQUES</a>
+            <a href="#PROMOÇÕES">PROMOÇÕES</a>
+            <a href="MonteTeclado.html">MONTE SEU TECLADO</a>
+            <a href="#products">NOSSOS PRODUTOS</a>
+            <a href="MonteSetup.html">MONTE SEU SETUP</a>
+        </nav>
+    </header>
+
+    <div class="mini-cart" id="mini-cart" style="display:none;">
+        <div class="mini-cart-content">
+            <div class="mini-cart-header">
+                <span>Carrinho</span>
+                <button class="mini-cart-close" id="mini-cart-close">&times;</button>
+            </div>
+            <div class="mini-cart-list" id="mini-cart-list">
+                <div class="product-item">
+                    <div class="product-details">
+                        <img src="imagens/custom.png" alt="PC Custom">
+                        <div>
+                            <span class="product-name">PC Custom</span>
+                            <span class="product-price">R$ 1.500,00</span>
+                            <button class="mini-cart-qty-btn" data-idx="0" data-action="-">-</button>
+                            <span>2</span>
+                            <button class="mini-cart-qty-btn" data-idx="0" data-action="+">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mini-cart-footer">
+                <div class="mini-cart-total">Total: <span id="mini-cart-total">R$ 0,00</span></div>
+                <a href="carrinho.html" class="mini-cart-btn">Ver carrinho completo</a>
+            </div>
+        </div>
+        <div class="mini-cart-overlay" id="mini-cart-overlay"></div>
+    </div>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>UPGRADE SEU GAME!</h1>
+                <p>Performance, estilo e imersão para dominar qualquer jogo</p>
+                <button class="cta-button">APROVEITE AS OFERTAS</button>
+            </div>
+        </section>
+
+        <!-- Seção Monte seu PC -->
+        <section class="montar-pc-section">
+            <div class="montar-pc-cards">
+                <a href="MonteSetup.html" class="montar-pc-card montar-pc-card-img" style="position:relative;display:block;">
+                    <img src="imagens/Banner-AplusTech-Barak-Branco.jpg" alt="Monte o seu Setup" class="montar-pc-img" style="width:100%;max-width:480px;height:320px;object-fit:cover;display:block;border-radius:28px;">
+                    <div class="montar-pc-overlay-text">
+                        <span class="montar-pc-label">MONTE O SEU SETUP</span>
+                        <span class="montar-pc-title custom"></span>
+                        <span class="montar-pc-desc">DO SEU JEITO</span>
+                    </div>
+                </a>
+                <a href="MonteTeclado.html" class="montar-pc-card montar-pc-card-img" style="position:relative;display:block;">
+                    <img src="imagens/BANNERT.png.jpg" alt="Monte o seu Teclado" class="montar-pc-img" style="width:100%;max-width:480px;height:320px;object-fit:cover;display:block;border-radius:28px;">
+                    <div class="montar-pc-overlay-text">
+                        <span class="montar-pc-label">MONTE O SEU TECLADO</span>
+                        <span class="montar-pc-title gamer">CUSTOM</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="featured-products" id="featured-products">
+            <h2>DESTAQUES DA SEMANA</h2>
+            <div class="featured-cards-grid"></div>
+            <div class="section-divider"></div>
+            <h2 class="carousel-title">Promoções imperdíveis</h2>
+            <div class="continuous-carousel-container" id="PROMOÇÕES">
+                <div class="continuous-carousel">
+                    <!-- vários .product-card aqui -->
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="products-section">
+            <h2>NOSSOS PRODUTOS</h2>
+            <div class="filters">
+                <button class="filter-btn active" data-category="all">Todos</button>
+                <button class="filter-btn" data-category="mouse">Mouses</button>
+                <button class="filter-btn" data-category="keyboard">Teclados</button>
+                <button class="filter-btn" data-category="headset">Headsets</button>
+            </div>
+            
+            <!-- Carrossel Contínuo de Produtos -->
+            <div class="continuous-carousel-container">
+                <div class="continuous-carousel"></div>
+            </div>
+            <div class="products-grid">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2>FALE CONOSCO</h2>
+            <div class="contact-container">
+                <form class="contact-form">
+                    <input type="text" placeholder="Seu nome" required>
+                    <input type="email" placeholder="Seu e-mail" required>
+                    <textarea placeholder="Como podemos te ajudar?" required></textarea>
+                    <button type="submit">ENVIAR</button>
+                </form>
+                <div class="contact-info">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#"><i class="fab fa-discord"></i> Discord</a>
+                    </div>
+                    <div class="faq">
+                        <h3>Perguntas Frequentes</h3>
+                        <div class="faq-item">
+                            <p class="question">Qual o prazo de entrega? <i class="fas fa-chevron-down"></i></p>
+                            <p class="answer">2-5 dias úteis</p>
+                        </div>
+                        <div class="faq-item">
+                            <p class="question">Tem garantia? <i class="fas fa-chevron-down"></i></p>
+                            <p class="answer">1 ano contra defeitos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2023 GameHub - Todos os direitos reservados</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        const cadastro = JSON.parse(localStorage.getItem('cadastro'));
+        const userArea = document.getElementById('user-area');
+        if (cadastro && cadastro.nome) {
+            userArea.innerHTML = `
+                <span style="color:#00ffb3;font-weight:bold;margin-right:8px;"><i class='fas fa-user'></i> ${cadastro.nome.split(' ')[0]}</span>
+                <button class="btn-cadastre-se" onclick="window.location.href='perfil.html'">
+                    <i class="fas fa-id-badge"></i> Perfil
+                </button>
+            `;
+        }
+
+        // --- BARRA DE PESQUISA DO HEADER FUNCIONAL ---
+        const headerSearchInput = document.querySelector('.search-input');
+        const headerSearchBtn = document.querySelector('.search-btn');
+        const suggestionsBox = document.querySelector('.header-search-suggestions');
+        if (headerSearchInput && headerSearchBtn) {
+            function searchProductsHeader() {
+                const term = headerSearchInput.value.trim().toLowerCase();
+                if (!term) {
+                    displayProducts(products);
+                    return;
+                }
+                const filtered = products.filter(p => p.name.toLowerCase().includes(term));
+                displayProducts(filtered);
+            }
+            headerSearchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    searchProductsHeader();
+                }
+            });
+            headerSearchBtn.addEventListener('click', function() {
+                searchProductsHeader();
+            });
+        }
+
+        headerSearchInput.addEventListener('input', function() {
+            const term = headerSearchInput.value.trim().toLowerCase();
+            if (!term) {
+                suggestionsBox.style.display = 'none';
+                return;
+            }
+            const filtered = products.filter(p => p.name.toLowerCase().includes(term));
+            if (filtered.length === 0) {
+                suggestionsBox.innerHTML = `<div class="suggestion-empty">Nenhum produto encontrado.</div>`;
+            } else {
+                suggestionsBox.innerHTML = filtered.map(prod => `
+                    <div class="suggestion-product" data-id="${prod.id}">
+                        <img src="${prod.image}" class="suggestion-product-img" alt="${prod.name}">
+                        <div class="suggestion-product-info">
+                            <div class="suggestion-product-title">${prod.name}</div>
+                            <div class="suggestion-product-price">R$ ${prod.price.toFixed(2)}</div>
+                        </div>
+                        <span class="suggestion-product-add"><i class="fas fa-cart-plus"></i></span>
+                    </div>
+                `).join('');
+            }
+            suggestionsBox.style.display = 'block';
+        });
+        headerSearchInput.addEventListener('focus', function() {
+            if (headerSearchInput.value.trim()) {
+                headerSearchInput.dispatchEvent(new Event('input'));
+            }
+        });
+        headerSearchInput.addEventListener('blur', function() {
+            setTimeout(() => { suggestionsBox.style.display = 'none'; }, 150);
+        });
+        suggestionsBox.addEventListener('mousedown', function(e) {
+            const prodDiv = e.target.closest('.suggestion-product');
+            if (prodDiv) {
+                const id = prodDiv.getAttribute('data-id');
+                window.location.href = `produto.html?produto=${id}`;
+            }
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('add-to-cart')) {
+            const btn = e.target;
+            const id = btn.dataset.id;
+            if (id) {
+                addToCart(id);
+                // Feedback visual temporário
+                btn.textContent = 'Adicionado!';
+                btn.disabled = true;
+                setTimeout(() => {
+                    btn.textContent = 'ADICIONAR AO CARRINHO';
+                    btn.disabled = false;
+                }, 2000);
+            }
+        }
+    });
+
+    function addToCart(productId) {
+        console.log('addToCart chamado com id:', productId);
+        const product = products.find(p => p.id == productId);
+        if (!product) {
+            console.log('Produto não encontrado para id:', productId);
+            return;
+        }
+        let cart = getCart();
+        const idx = cart.findIndex(item => item.id == productId);
+        if (idx >= 0) {
+            cart[idx].qty += 1;
+        } else {
+            cart.push({ id: product.id, name: product.name, price: product.price, oldPrice: product.oldPrice, image: product.image, qty: 1 });
+        }
+        setCart(cart);
+        updateCartCount();
+    }
+
+    createCarouselCards();
+    enableContinuousCarouselJS && enableContinuousCarouselJS();
+
+    // Scroll suave para 'NOSSOS PRODUTOS'
+    document.addEventListener('DOMContentLoaded', function() {
+        const nossosProdutosLink = document.querySelector('.main-nav a[href="#products"]');
+        if (nossosProdutosLink) {
+            nossosProdutosLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = document.getElementById('products');
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>
