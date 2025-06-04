@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Carrinho | GameHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background: #18182a;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .cart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+        .cart-main {
+            flex: 2;
+            background: #23233a;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px 0 rgba(0,255,179,0.08);
+            padding: 32px 24px 24px 24px;
+            min-width: 340px;
+        }
+        .cart-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+        .cart-header h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ffb3;
+            margin: 0;
+        }
+        .cart-header .select-all {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+        .cart-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            background: #1e1e2e;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px 0 #00ffb344;
+            padding: 18px 16px;
+            gap: 18px;
+            position: relative;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .cart-item:hover {
+            box-shadow: 0 4px 24px 0 #00ffb399, 0 0 0 2px #6e00ff99;
+            transform: scale(1.01);
+        }
+        .cart-item .item-checkbox {
+            margin-right: 10px;
+        }
+        .cart-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: #23233a;
+            box-shadow: 0 2px 8px 0 #00ffb344;
+        }
+        .cart-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .cart-title {
+            font-size: 1.08rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+        .cart-options {
+            font-size: 0.97rem;
+            color: #00cfff;
+            margin-bottom: 2px;
+        }
+        .cart-prices {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cart-price {
+            color: #00ffb3;
+            font-size: 1.18rem;
+            font-weight: bold;
+        }
+        .cart-old-price {
+            color: #888;
+            text-decoration: line-through;
+            font-size: 1rem;
+        }
+        .cart-qty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+        }
+        .qty-btn {
+            background: linear-gradient(90deg, #00ffb3 0%, #6e00ff 100%);
+            color: #18182a;
+            border: none;
+            border-radius: 6px;
+            width: 28px;
+            height: 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .qty-btn:hover {
+            background: linear-gradient(90deg, #6e00ff 0%, #00ffb3 100%);
+            color: #fff;
+        }
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #ff4b7d;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 12px;
+            transition: color 0.2s;
+        }
+        .remove-btn:hover {
+            color: #fff;
+        }
+        .cart-summary {
+            flex: 1;
+            background: #23233a;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px 0 rgba(0,255,179,0.08);
+            padding: 32px 24px 24px 24px;
+            min-width: 320px;
+            max-width: 380px;
+            margin-left: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            height: fit-content;
+        }
+        .summary-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+        }
+        .summary-total {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ffb3;
+            margin: 12px 0 8px 0;
+            text-shadow: 0 0 8px #00ffb3;
+        }
+        .continue-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #00ffb3 0%, #6e00ff 100%);
+            color: #18182a;
+            font-size: 1.18rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 16px 0;
+            margin-top: 8px;
+            box-shadow: 0 0 18px 0 #00ffb3cc, 0 0 8px 0 #a200ff99;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, transform 0.18s;
+        }
+        .continue-btn:hover {
+            background: linear-gradient(90deg, #6e00ff 0%, #00ffb3 100%);
+            color: #fff;
+            transform: scale(1.03);
+        }
+        .frete-bar {
+            background: #1e1e2e;
+            border-radius: 8px;
+            margin: 12px 0 8px 0;
+            padding: 8px 14px;
+            font-size: 1rem;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .frete-progress {
+            width: 100%;
+            height: 10px;
+            background: #23233a;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .frete-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00ffb3 0%, #6e00ff 100%);
+            border-radius: 6px;
+            transition: width 0.4s;
+        }
+        .entrega-rapida, .pagamento-seguro {
+            background: #1e1e2e;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #fff;
+            box-shadow: 0 2px 8px 0 #00ffb344;
+        }
+        .entrega-rapida i, .pagamento-seguro i {
+            color: #00ffb3;
+            margin-right: 8px;
+        }
+        .pagamentos-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .pagamentos-icons img {
+            height: 28px;
+            border-radius: 4px;
+            background: #fff;
+            padding: 2px 6px;
+        }
+        @media (max-width: 900px) {
+            .cart-container {
+                flex-direction: column;
+                gap: 24px;
+            }
+            .cart-summary {
+                max-width: 100%;
+                margin-left: 0;
+            }
+        }
+        .mini-cart-content {
+            z-index: 2;
+        }
+        .mini-cart-overlay {
+            z-index: 1;
+        }
+        .main-header {
+            background: var(--dark);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="cart-container-top" style="max-width:1200px;margin:32px auto 0 auto;padding:0 16px;">
+        <a href="index.html" class="btn-voltar-inicio" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg,#6e00ff 0%,#00ffb3 100%);color:#18182a;font-weight:bold;font-size:1.08rem;border:none;border-radius:10px;padding:10px 22px;margin-bottom:18px;text-decoration:none;box-shadow:0 0 12px 2px #00ffb3cc,0 0 8px 0 #a200ff99;transition:background 0.2s, color 0.2s, transform 0.18s;cursor:pointer;">
+            <i class="fas fa-home"></i> Voltar ao Início
+        </a>
+    </div>
+    <div class="progress-bar" style="margin-bottom:0;">
+        <div class="progress-step active"><i class="fas fa-shopping-cart"></i><br>Carrinho</div>
+        <div class="progress-step"><i class="fas fa-user"></i><br>Dados</div>
+        <div class="progress-step"><i class="fas fa-credit-card"></i><br>Pagamento</div>
+        <div class="progress-step"><i class="fas fa-check-circle"></i><br>Concluído</div>
+    </div>
+    <main>
+        <div class="cart-container">
+            <section class="cart-main">
+                <div class="cart-header">
+                    <h2>Seu Carrinho (<span id="cart-count">1</span>)</h2>
+                    <div class="select-all">
+                        <input type="checkbox" id="select-all">
+                        <label for="select-all">Selecionar todos os itens</label>
+                    </div>
+                </div>
+                <div class="cart-list" id="cart-list">
+                    <!-- Itens do carrinho serão inseridos aqui via JS -->
+                </div>
+            </section>
+            <aside class="cart-summary">
+                <div class="summary-title">Resumo</div>
+                <div class="summary-row"><span>Subtotal</span><span id="subtotal">R$ 0,00</span></div>
+                <div class="summary-row"><span>Descontos</span><span id="descontos">- R$ 0,00</span></div>
+                <div class="frete-bar">
+                    <span id="frete-msg">Adicione <span id="frete-falta">R$ 99,00</span> para frete grátis</span>
+                    <div class="frete-progress">
+                        <div class="frete-progress-bar" id="frete-progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="summary-row summary-total"><span>Total</span><span id="total">R$ 0,00</span></div>
+                <button class="continue-btn" id="continue-btn" onclick="window.location.href='Cadastro.html'">Continuar para Pagamento</button>
+                <div class="entrega-rapida"><i class="fas fa-shipping-fast"></i> Entrega rápida<br><small>✔️ Reembolso se atrasar ou chegar com dano</small></div>
+                <div class="pagamento-seguro"><i class="fas fa-shield-alt"></i> Pagamentos seguros<br><small>Seus dados estão protegidos</small>
+                    <div class="pagamentos-icons">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Pix_logo.png" alt="Pix">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Elo_card_logo.png" alt="Elo">
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <section class="produtos-sugeridos">
+            <h3 class="featured-title" style="margin:32px 0 18px 0;">Produtos que você pode gostar</h3>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="card-badges"><span class='badge-mais-vendido'>MAIS VENDIDOS</span><span class='badge-desconto'>-33%</span></div>
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Mouse Gamer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">Mouse Gamer Ultra X RGB</h3>
+                        <p class="product-price">R$ 199,90 <span class="old-price">R$ 299,90</span></p>
+                        <p class="installments">12x de R$ 16,66 sem juros</p>
+                        <button class="add-to-cart" data-id="mouse-ultra-x">Adicionar ao carrinho</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-badges"><span class='badge-desconto'>-29%</span></div>
+                    <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=400&q=80" alt="Teclado Mecânico" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">Teclado Mecânico Thunder Pro</h3>
+                        <p class="product-price">R$ 349,90 <span class="old-price">R$ 489,90</span></p>
+                        <p class="installments">12x de R$ 29,16 sem juros</p>
+                        <button class="add-to-cart" data-id="teclado-thunder-pro">Adicionar ao carrinho</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-badges"><span class='badge-mais-vendido'>MAIS VENDIDOS</span><span class='badge-desconto'>-25%</span></div>
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Headset Gamer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">Headset 7.1 Surround Storm</h3>
+                        <p class="product-price">R$ 299,90 <span class="old-price">R$ 399,90</span></p>
+                        <p class="installments">12x de R$ 24,99 sem juros</p>
+                        <button class="add-to-cart" data-id="headset-7-1">Adicionar ao carrinho</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-badges"><span class='badge-desconto'>-22%</span></div>
+                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Mousepad Gamer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">Mousepad Gamer Speed XL</h3>
+                        <p class="product-price">R$ 89,90 <span class="old-price">R$ 114,90</span></p>
+                        <p class="installments">12x de R$ 7,49 sem juros</p>
+                        <button class="add-to-cart" data-id="mousepad-speed-xl">Adicionar ao carrinho</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-badges"><span class='badge-desconto'>-28%</span></div>
+                    <img src="https://images.unsplash.com/photo-1512257752821-0a9115c56856?auto=format&fit=crop&w=400&q=80" alt="Headset Wireless HyperSound" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">Headset Wireless HyperSound</h3>
+                        <p class="product-price">R$ 359,90 <span class="old-price">R$ 499,90</span></p>
+                        <p class="installments">12x de R$ 29,99 sem juros</p>
+                        <button class="add-to-cart" data-id="headset-wireless-hypersound">Adicionar ao carrinho</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-badges"><span class='badge-desconto'>-20%</span></div>
+                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Teclado Gamer RGB Compact" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">Teclado Gamer RGB Compact</h3>
+                        <p class="product-price">R$ 279,90 <span class="old-price">R$ 349,90</span></p>
+                        <p class="installments">12x de R$ 23,32 sem juros</p>
+                        <button class="add-to-cart" data-id="teclado-rgb-compact">Adicionar ao carrinho</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-badges"><span class='badge-desconto'>-18%</span></div>
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Mouse Gamer Elite" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">Mouse Gamer Elite</h3>
+                        <p class="product-price">R$ 159,90 <span class="old-price">R$ 194,90</span></p>
+                        <p class="installments">12x de R$ 13,32 sem juros</p>
+                        <button class="add-to-cart" data-id="mouse-gamer-elite">Adicionar ao carrinho</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+    <script>
+        // Utilidades para localStorage
+        function getCart() {
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        }
+        function setCart(cart) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        const FRETE_GRATIS = 300;
+        function renderCart() {
+            let cart = getCart();
+            // Adicionar produtos customizados do teclado, se houver
+            const custom = JSON.parse(localStorage.getItem('cartCustomKeyboard'));
+            if (custom) {
+                ['base', 'switch', 'keycaps'].forEach(tipo => {
+                    const prod = custom[tipo];
+                    if (prod) {
+                        // Evitar duplicidade se já estiver no carrinho
+                        if (!cart.some(item => item.name === prod.name)) {
+                            cart.push({
+                                name: prod.name,
+                                price: prod.price,
+                                oldPrice: prod.price, // sem desconto
+                                image: prod.img,
+                                qty: 1,
+                                options: tipo.toUpperCase()
+                            });
+                        }
+                    }
+                });
+            }
+            const cartList = document.getElementById('cart-list');
+            cartList.innerHTML = '';
+            let subtotal = 0;
+            let descontos = 0;
+            cart.forEach((item, idx) => {
+                subtotal += item.price * item.qty;
+                descontos += (item.oldPrice - item.price) * item.qty;
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `
+                    <input type="checkbox" class="item-checkbox" checked>
+                    <img src="${item.image}" class="cart-thumb" alt="${item.name}">
+                    <div class="cart-info">
+                        <div class="cart-title">${item.name}</div>
+                        <div class="cart-options">${item.options ? item.options : ''}</div>
+                        <div class="cart-prices">
+                            <span class="cart-price">R$ ${item.price.toFixed(2)}</span>
+                            <span class="cart-old-price">R$ ${item.oldPrice.toFixed(2)}</span>
+                        </div>
+                        <div class="cart-qty">
+                            <button class="qty-btn" onclick="updateQty(${idx}, -1)">-</button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn" onclick="updateQty(${idx}, 1)">+</button>
+                            <button class="remove-btn" onclick="removeItem(${idx})"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+                cartList.appendChild(itemDiv);
+            });
+            document.getElementById('cart-count').textContent = cart.length;
+            document.getElementById('subtotal').textContent = `R$ ${subtotal.toFixed(2)}`;
+            document.getElementById('descontos').textContent = `- R$ ${descontos.toFixed(2)}`;
+            let falta = FRETE_GRATIS - subtotal;
+            if (falta > 0) {
+                document.getElementById('frete-msg').innerHTML = `Adicione <span id='frete-falta'>R$ ${falta.toFixed(2)}</span> para frete grátis`;
+                document.getElementById('frete-progress-bar').style.width = `${Math.min(100, (subtotal/FRETE_GRATIS)*100)}%`;
+            } else {
+                document.getElementById('frete-msg').innerHTML = `<span style='color:#00ffb3'>Parabéns! Você ganhou frete grátis 🎉</span>`;
+                document.getElementById('frete-progress-bar').style.width = `100%`;
+            }
+            document.getElementById('total').textContent = `R$ ${(subtotal - descontos).toFixed(2)}`;
+        }
+        function updateQty(idx, delta) {
+            let cart = getCart();
+            // Verifica se é produto customizado do teclado
+            const custom = JSON.parse(localStorage.getItem('cartCustomKeyboard'));
+            let isCustom = false;
+            if (custom) {
+                ['base', 'switch', 'keycaps'].forEach(tipo => {
+                    const prod = custom[tipo];
+                    if (prod && cart[idx] && cart[idx].name === prod.name) {
+                        isCustom = true;
+                        // Atualiza qty no objeto customizado
+                        if (!prod.qty) prod.qty = 1;
+                        prod.qty += delta;
+                        if (prod.qty < 1) prod.qty = 1;
+                        cart[idx].qty = prod.qty;
+                        // Atualiza localStorage
+                        custom[tipo] = prod;
+                        localStorage.setItem('cartCustomKeyboard', JSON.stringify(custom));
+                    }
+                });
+            }
+            if (!isCustom) {
+                cart[idx].qty += delta;
+                if (cart[idx].qty < 1) cart[idx].qty = 1;
+            }
+            setCart(cart);
+            renderCart();
+        }
+        function removeItem(idx) {
+            const cart = getCart();
+            const cartList = document.getElementById('cart-list');
+            const itemDiv = cartList.children[idx];
+            itemDiv.style.transition = 'transform 0.4s, opacity 0.4s';
+            itemDiv.style.transform = 'translateX(80px)';
+            itemDiv.style.opacity = '0';
+            setTimeout(() => {
+                cart.splice(idx, 1);
+                setCart(cart);
+                renderCart();
+            }, 400);
+        }
+        document.getElementById('select-all').addEventListener('change', function() {
+            document.querySelectorAll('.item-checkbox').forEach(cb => cb.checked = this.checked);
+        });
+        renderCart();
+
+        // Corrigir botões de produtos sugeridos para adicionar ao carrinho
+        document.querySelectorAll('.products-grid .add-to-cart').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                if (id) {
+                    addToCart(id);
+                    // Feedback visual temporário
+                    this.textContent = 'Adicionado!';
+                    this.disabled = true;
+                    setTimeout(() => {
+                        this.textContent = 'Adicionar ao carrinho';
+                        this.disabled = false;
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
